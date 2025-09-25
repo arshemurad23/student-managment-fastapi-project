@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">Update Student</h2>
+
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+<form method="post" class="card p-4 shadow-sm">
+    <p><strong>Roll No:</strong> {{ roll_no }}</p>
+
+    <div class="mb-3">
+        <label class="form-label">Name (leave blank to keep same):</label>
+        <input type="text" name="name" value="{{ student.name }}" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Marks (leave blank to keep same):</label>
+        <input type="text" name="marks" value="{{ student.marks }}" class="form-control">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Student</button>
+</form>
+{% endblock %}

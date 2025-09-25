@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">Student List</h2>
+
+{% if students %}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Marks</th>
+                <th>Grade</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for roll, data in students.items() %}
+            <tr>
+                <td>{{ roll }}</td>
+                <td>{{ data.name }}</td>
+                <td>{{ data.marks }}</td>
+                <td>
+                    {% if data.marks >= 80 %}
+                        <span class="badge bg-success">A</span>
+                    {% elif data.marks >= 60 %}
+                        <span class="badge bg-primary">B</span>
+                    {% elif data.marks >= 40 %}
+                        <span class="badge bg-warning text-dark">C</span>
+                    {% else %}
+                        <span class="badge bg-danger">Fail</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="/students/update/{{ roll }}" class="btn btn-sm btn-info">Edit</a>
+                    <a href="/students/delete/{{ roll }}" class="btn btn-sm btn-danger"
+                       onclick="return confirm('Delete this student?')">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="alert alert-warning">⚠️ No students found.</div>
+{% endif %}
+{% endblock %}
